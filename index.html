@@ -7,7 +7,7 @@
 
 <!-- خط Cairo + خط Amiri للتراث -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-<!-- Font Awesome للأيقونات التراثية -->
+<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
@@ -84,11 +84,135 @@ font-size: 1.2rem;
 box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* هيدر مع تأثير تراثي */
+/* ===== زر تغيير اللغة - تصميم تراثي ===== */
+.language-switcher {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 10000;
+    font-family: 'Cairo', sans-serif;
+}
+
+.lang-btn {
+    background: #2d2010;
+    border: 3px solid #e6cba0;
+    color: #e6cba0;
+    padding: 12px 25px;
+    border-radius: 60px 15px 60px 15px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 5px 5px 0 #7b4b2a;
+    backdrop-filter: blur(5px);
+    min-width: 160px;
+}
+
+.lang-btn:hover {
+    background: #b78c5f;
+    color: #2d2010;
+    border-color: #5a3e28;
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 0 #5a3e28;
+}
+
+.lang-btn .globe-icon {
+    font-size: 24px;
+}
+
+.lang-btn .arrow {
+    margin-right: auto;
+    font-size: 14px;
+    transition: transform 0.3s;
+}
+
+.lang-btn.active .arrow {
+    transform: rotate(180deg);
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    background: #fff9f0;
+    border: 3px solid #b78c5f;
+    border-radius: 20px 10px 20px 10px;
+    margin-top: 10px;
+    padding: 10px 0;
+    list-style: none;
+    box-shadow: 8px 8px 0 #5a3e28;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 10001;
+}
+
+.lang-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.lang-dropdown li {
+    padding: 12px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d2010;
+    transition: all 0.2s;
+    border-bottom: 1px dashed #e6cba0;
+}
+
+.lang-dropdown li:last-child {
+    border-bottom: none;
+}
+
+.lang-dropdown li:hover {
+    background: #e6d5b8;
+    padding-right: 30px;
+}
+
+.lang-dropdown li span {
+    font-size: 22px;
+}
+
+.lang-dropdown li.active {
+    background: #b78c5f;
+    color: #fff;
+    font-weight: 700;
+}
+
+/* تنسيق للغة الإنجليزية (عند تفعيلها) */
+[dir="ltr"] .language-switcher {
+    left: 20px;
+    right: auto;
+}
+
+[dir="ltr"] .lang-btn {
+    flex-direction: row-reverse;
+}
+
+[dir="ltr"] .lang-btn .arrow {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+[dir="ltr"] .lang-dropdown {
+    left: 0;
+    right: auto;
+}
+
 header{
 height:100vh;
-background:
-linear-gradient(rgba(45,32,16,0.8), rgba(30,60,44,0.9)),
+background: linear-gradient(rgba(45,32,16,0.8), rgba(30,60,44,0.9)),
 url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070') center/cover no-repeat;
 display:flex;
 flex-direction:column;
@@ -149,7 +273,7 @@ border: 2px solid #e6cba0;
 
 .btn:hover{
 background:#e6cba0;
-transform:translateY(-3px);
+transform: translateY(-3px);
 box-shadow:0 12px 0 #5a3e28;
 }
 
@@ -358,6 +482,21 @@ section{padding:60px 5%;}
 .discount-item{flex-wrap: wrap; justify-content: center; text-align: center; padding: 1.2rem;}
 .medical-disclaimer{font-size: 1.1rem; padding: 1.2rem;}
 .medical-disclaimer i{font-size: 1.6rem; margin: 0 0.5rem;}
+
+.language-switcher {
+    top: 70px;
+    left: 10px;
+}
+
+.lang-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    min-width: 130px;
+}
+
+.lang-btn .globe-icon {
+    font-size: 18px;
+}
 }
 
 </style>
@@ -365,14 +504,29 @@ section{padding:60px 5%;}
 
 <body>
 
+<!-- زر تغيير اللغة -->
+<div class="language-switcher">
+    <button class="lang-btn" id="langBtn">
+        <span class="globe-icon">🌐</span>
+        <span class="lang-text" id="currentLang">العربية</span>
+        <span class="arrow">▼</span>
+    </button>
+    <ul class="lang-dropdown" id="langDropdown">
+        <li data-lang="ar" data-flag="🇸🇦" class="active"><span>🇸🇦</span> العربية</li>
+        <li data-lang="en" data-flag="🇬🇧"><span>🇬🇧</span> English</li>
+        <li data-lang="tr" data-flag="🇹🇷"><span>🇹🇷</span> Türkçe</li>
+        <li data-lang="fil" data-flag="🇵🇭"><span>🇵🇭</span> Filipino</li>
+    </ul>
+</div>
+
 <!-- زينة رمضان -->
 <div class="ramadan-lights">
     <i class="fas fa-moon"></i> هلال الخير • قمر الليل • فوانيس رمضان <i class="fas fa-star"></i>
 </div>
 
 <header>
-<h1><i class="fas fa-spa"></i> مركز رست الرياضي للمساج <i class="fas fa-spa"></i></h1>
-<p>
+<h1><i class="fas fa-spa"></i> <span id="header-title">مركز رست الرياضي للمساج</span> <i class="fas fa-spa"></i></h1>
+<p id="header-description">
 تجربة فاخرة من الهدوء والراحة في قلب حي الصفا – تبوك.
 نقدم خدمات مساج وعناية متكاملة بأعلى معايير النظافة.
 </p>
@@ -380,8 +534,8 @@ section{padding:60px 5%;}
 </header>
 
 <section id="about">
-<h2 class="section-title"><span>من نحن</span></h2>
-<div class="about">
+<h2 class="section-title"><span id="about-title">من نحن</span></h2>
+<div class="about" id="about-text">
 نحن مركز متخصص في تقديم جلسات المساج الاحترافية والعناية الشخصية للرجال،
 نوفر بيئة راقية وهادئة تمنحك تجربة استرخاء حقيقية بعيداً عن ضغوط الحياة اليومية.
 هدفنا هو راحتك التامة.
@@ -389,68 +543,66 @@ section{padding:60px 5%;}
 </section>
 
 <section id="services">
-<h2 class="section-title"><span>خدمات المساج</span></h2>
+<h2 class="section-title"><span id="services-title">خدمات المساج</span></h2>
 
 <div class="services">
-
 <div class="card">
-<h3>المساج السويدي</h3>
-<p>استرخاء عميق وتنشيط الدورة الدموية بأسلوب مريح.</p>
+<h3 id="service1-title">المساج السويدي</h3>
+<p id="service1-desc">استرخاء عميق وتنشيط الدورة الدموية بأسلوب مريح.</p>
 </div>
 
 <div class="card">
-<h3>المساج التايلندي</h3>
-<p>تقنيات شد وتمدد احترافية لتحسين المرونة.</p>
+<h3 id="service2-title">المساج التايلندي</h3>
+<p id="service2-desc">تقنيات شد وتمدد احترافية لتحسين المرونة.</p>
 </div>
 
 <div class="card">
-<h3>المساج الياباني</h3>
-<p>ضغط دقيق على نقاط الطاقة لاستعادة التوازن.</p>
+<h3 id="service3-title">المساج الياباني</h3>
+<p id="service3-desc">ضغط دقيق على نقاط الطاقة لاستعادة التوازن.</p>
 </div>
 
 <div class="card">
-<h3>المساج الرياضي</h3>
-<p>مناسب للرياضيين ويساعد في الاستشفاء العضلي.</p>
+<h3 id="service4-title">المساج الرياضي</h3>
+<p id="service4-desc">مناسب للرياضيين ويساعد في الاستشفاء العضلي.</p>
 </div>
 
 <div class="card">
-<h3>الأكواب الهوائية</h3>
-<p>تحفيز الدورة الدموية وتقليل التشنجات.</p>
+<h3 id="service5-title">الأكواب الهوائية</h3>
+<p id="service5-desc">تحفيز الدورة الدموية وتقليل التشنجات.</p>
 </div>
 
 <div class="card">
-<h3>مساج الأحجار الساخنة</h3>
-<p>استرخاء عميق وتخفيف آلام العضلات.</p>
+<h3 id="service6-title">مساج الأحجار الساخنة</h3>
+<p id="service6-desc">استرخاء عميق وتخفيف آلام العضلات.</p>
 </div>
 
 <div class="card">
-<h3>الحمام المغربي</h3>
-<p>تنظيف عميق وتقشير احترافي للبشرة.</p>
+<h3 id="service7-title">الحمام المغربي</h3>
+<p id="service7-desc">تنظيف عميق وتقشير احترافي للبشرة.</p>
 </div>
 
 <div class="card">
-<h3>العناية الشخصية</h3>
-<p>باديكير – مانيكير – تنظيف القدم – حلاقة حسب الطلب.</p>
+<h3 id="service8-title">العناية الشخصية</h3>
+<p id="service8-desc">باديكير – مانيكير – تنظيف القدم – حلاقة حسب الطلب.</p>
 </div>
-
 </div>
 </section>
 
 <section class="cta">
-<h2>جرب الخدمة… وشاركنا رأيك</h2>
-<p>تقييمك لنا يساعدنا على التطور.</p>
+<h2 id="cta-title">جرب الخدمة… وشاركنا رأيك</h2>
+<p id="cta-text">تقييمك لنا يساعدنا على التطور.</p>
 <br>
-<a href="https://share.google/2Dz5FNZyGDSyAN9jm" target="_blank">قيّمنا على قوقل</a>
+<a href="https://share.google/2Dz5FNZyGDSyAN9jm" target="_blank" id="cta-button">قيّمنا على قوقل</a>
 </section>
 
-<!-- التنويه قبل الفوتر مباشرة - حسب الطلب -->
-<div class="medical-disclaimer">
+<!-- التنويه قبل الفوتر مباشرة -->
+<div class="medical-disclaimer" id="disclaimer">
     <i class="fas fa-exclamation-circle"></i>
     تنويه: مركز رست مركز متخصص في المساج والاسترخاء، وجميع خدماتنا للراحة والرفاهية فقط وليست بديلاً عن العلاج الطبي.
     <i class="fas fa-exclamation-circle"></i>
 </div>
 
-<footer>
+<footer id="footer">
 © 2026 مركز رست الرياضي – حي الصفا – تبوك – جميع الحقوق محفوظة
 <br>
 <i class="fas fa-phone"></i> قريباً  |  <i class="fas fa-map-marker-alt"></i> تبوك - حي الصفا
@@ -464,7 +616,7 @@ document.addEventListener('copy', e => e.preventDefault());
 document.addEventListener('cut', e => e.preventDefault());
 document.addEventListener('selectstart', e => e.preventDefault());
 
-/* تأثير ظهور الكروت */
+/* تأثير ظهور البطاقات */
 const cards = document.querySelectorAll('.card');
 
 const observer = new IntersectionObserver(entries=>{
@@ -482,6 +634,187 @@ card.style.transform="translateY(50px)";
 card.style.transition="0.8s";
 observer.observe(card);
 });
+
+// ===== نظام تغيير اللغة مع ترجمة البطاقات =====
+const langBtn = document.getElementById('langBtn');
+const langDropdown = document.getElementById('langDropdown');
+const currentLangSpan = document.getElementById('currentLang');
+const langOptions = document.querySelectorAll('.lang-dropdown li');
+
+// قاموس الترجمة الكامل مع البطاقات
+const translations = {
+    ar: {
+        headerTitle: "مركز رست الرياضي للمساج",
+        headerDesc: "تجربة فاخرة من الهدوء والراحة في قلب حي الصفا – تبوك. نقدم خدمات مساج وعناية متكاملة بأعلى معايير النظافة.",
+        aboutTitle: "من نحن",
+        aboutText: "نحن مركز متخصص في تقديم جلسات المساج الاحترافية والعناية الشخصية للرجال، نوفر بيئة راقية وهادئة تمنحك تجربة استرخاء حقيقية بعيداً عن ضغوط الحياة اليومية. هدفنا هو راحتك التامة.",
+        servicesTitle: "خدمات المساج",
+        // ترجمة البطاقات
+        service1: { title: "المساج السويدي", desc: "استرخاء عميق وتنشيط الدورة الدموية بأسلوب مريح." },
+        service2: { title: "المساج التايلندي", desc: "تقنيات شد وتمدد احترافية لتحسين المرونة." },
+        service3: { title: "المساج الياباني", desc: "ضغط دقيق على نقاط الطاقة لاستعادة التوازن." },
+        service4: { title: "المساج الرياضي", desc: "مناسب للرياضيين ويساعد في الاستشفاء العضلي." },
+        service5: { title: "الأكواب الهوائية", desc: "تحفيز الدورة الدموية وتقليل التشنجات." },
+        service6: { title: "مساج الأحجار الساخنة", desc: "استرخاء عميق وتخفيف آلام العضلات." },
+        service7: { title: "الحمام المغربي", desc: "تنظيف عميق وتقشير احترافي للبشرة." },
+        service8: { title: "العناية الشخصية", desc: "باديكير – مانيكير – تنظيف القدم – حلاقة حسب الطلب." },
+        ctaTitle: "جرب الخدمة… وشاركنا رأيك",
+        ctaText: "تقييمك لنا يساعدنا على التطور.",
+        ctaButton: "قيّمنا على قوقل",
+        disclaimer: "تنويه: مركز رست مركز متخصص في المساج والاسترخاء، وجميع خدماتنا للراحة والرفاهية فقط وليست بديلاً عن العلاج الطبي.",
+        footer: "© 2026 مركز رست الرياضي – حي الصفا – تبوك – جميع الحقوق محفوظة"
+    },
+    en: {
+        headerTitle: "Rest Sports Massage Center",
+        headerDesc: "A luxurious experience of tranquility in the heart of Al-Safa District - Tabuk. We provide comprehensive massage and care services with the highest hygiene standards.",
+        aboutTitle: "About Us",
+        aboutText: "We are a specialized center for professional massage sessions and personal care for men. We provide an elegant and quiet environment that gives you a real relaxation experience away from daily life pressures. Our goal is your complete comfort.",
+        servicesTitle: "Massage Services",
+        // Card translations
+        service1: { title: "Swedish Massage", desc: "Deep relaxation and stimulation of blood circulation in a comfortable way." },
+        service2: { title: "Thai Massage", desc: "Professional stretching techniques to improve flexibility." },
+        service3: { title: "Japanese Massage", desc: "Precise pressure on energy points to restore balance." },
+        service4: { title: "Sports Massage", desc: "Suitable for athletes and helps in muscle recovery." },
+        service5: { title: "Cupping Therapy", desc: "Stimulates blood circulation and reduces muscle spasms." },
+        service6: { title: "Hot Stone Massage", desc: "Deep relaxation and relief of muscle pain." },
+        service7: { title: "Moroccan Bath", desc: "Deep cleansing and professional exfoliation for the skin." },
+        service8: { title: "Personal Care", desc: "Pedicure - Manicure - Foot cleaning - Shaving on demand." },
+        ctaTitle: "Try the service... Share your opinion",
+        ctaText: "Your evaluation helps us improve.",
+        ctaButton: "Review us on Google",
+        disclaimer: "Notice: Rest Center is specialized in massage and relaxation, and all our services are for comfort and wellness only and are not a substitute for medical treatment.",
+        footer: "© 2026 Rest Sports Center - Al-Safa District - Tabuk - All rights reserved"
+    },
+    tr: {
+        headerTitle: "Rest Spor Masaj Merkezi",
+        headerDesc: "Al-Safa Bölgesi'nin kalbinde lüks bir huzur deneyimi - Tebük. En yüksek hijyen standartlarıyla kapsamlı masaj ve bakım hizmetleri sunuyoruz.",
+        aboutTitle: "Hakkımızda",
+        aboutText: "Erkekler için profesyonel masaj seansları ve kişisel bakım konusunda uzmanlaşmış bir merkeziz. Günlük yaşamın stresinden uzak, size gerçek bir rahatlama deneyimi sunan şık ve sakin bir ortam sağlıyoruz. Hedefimiz tam konforunuzdur.",
+        servicesTitle: "Masaj Hizmetleri",
+        // Card translations
+        service1: { title: "İsveç Masajı", desc: "Rahatlatıcı bir şekilde derin gevşeme ve kan dolaşımını uyarma." },
+        service2: { title: "Tay Masajı", desc: "Esnekliği artırmak için profesyonel germe teknikleri." },
+        service3: { title: "Japon Masajı", desc: "Dengeyi sağlamak için enerji noktalarına hassas baskı." },
+        service4: { title: "Spor Masajı", desc: "Sporcular için uygun, kas iyileşmesine yardımcı olur." },
+        service5: { title: "Kupa Terapisi", desc: "Kan dolaşımını uyarır ve kas spazmlarını azaltır." },
+        service6: { title: "Sıcak Taş Masajı", desc: "Derin gevşeme ve kas ağrılarının hafifletilmesi." },
+        service7: { title: "Fas Hamamı", desc: "Cilt için derin temizlik ve profesyonel peeling." },
+        service8: { title: "Kişisel Bakım", desc: "Pedikür - Manikür - Ayak temizliği - İsteğe bağlı tıraş." },
+        ctaTitle: "Hizmeti dene... Fikrini paylaş",
+        ctaText: "Değerlendirmeniz gelişmemize yardımcı olur.",
+        ctaButton: "Bizi Google'da değerlendir",
+        disclaimer: "Uyarı: Rest Merkezi masaj ve rahatlama konusunda uzmanlaşmıştır ve tüm hizmetlerimiz sadece konfor ve sağlıklı yaşam içindir ve tıbbi tedavinin yerine geçmez.",
+        footer: "© 2026 Rest Spor Merkezi - Al-Safa Bölgesi - Tebük - Tüm hakları saklıdır"
+    },
+    fil: {
+        headerTitle: "Rest Sports Massage Center",
+        headerDesc: "Isang marangyang karanasan ng katahimikan sa puso ng Al-Safa District - Tabuk. Nag-aalok kami ng komprehensibong serbisyo sa masahe at pangangalaga na may pinakamataas na pamantayan sa kalinisan.",
+        aboutTitle: "Tungkol sa Amin",
+        aboutText: "Kami ay isang espesyal na sentro para sa propesyonal na masahe at personal na pangangalaga para sa mga lalaki. Nagbibigay kami ng elegante at tahimik na kapaligiran na nagbibigay sa iyo ng tunay na karanasan sa pagpapahinga malayo sa pang-araw-araw na stress sa buhay. Ang aming layunin ay ang iyong kumpletong kaginhawaan.",
+        servicesTitle: "Mga Serbisyo ng Massage",
+        // Card translations
+        service1: { title: "Swedish Massage", desc: "Malalim na pagpapahinga at pagpapasigla ng sirkulasyon ng dugo sa komportableng paraan." },
+        service2: { title: "Thai Massage", desc: "Propesyonal na stretching techniques para mapabuti ang flexibility." },
+        service3: { title: "Japanese Massage", desc: "Precisong pressure sa energy points para maibalik ang balance." },
+        service4: { title: "Sports Massage", desc: "Angkop para sa mga atleta at tumutulong sa muscle recovery." },
+        service5: { title: "Cupping Therapy", desc: "Nagpapasigla ng sirkulasyon ng dugo at nagpapababa ng muscle spasms." },
+        service6: { title: "Hot Stone Massage", desc: "Malalim na pagpapahinga at pagtanggal ng muscle pain." },
+        service7: { title: "Moroccan Bath", desc: "Malalim na paglilinis at propesyonal na exfoliation para sa balat." },
+        service8: { title: "Personal na Pangangalaga", desc: "Pedicure - Manicure - Paglilinis ng paa - Pag-ahit kapag hiniling." },
+        ctaTitle: "Subukan ang serbisyo... Ibahagi ang iyong opinyon",
+        ctaText: "Ang iyong pagsusuri ay tumutulong sa amin na mapabuti.",
+        ctaButton: "I-review kami sa Google",
+        disclaimer: "Paunawa: Ang Rest Center ay dalubhasa sa masahe at relaxation, at ang lahat ng aming serbisyo ay para sa kaginhawahan at wellness lamang at hindi kapalit ng medikal na paggamot.",
+        footer: "© 2026 Rest Sports Center - Al-Safa District - Tabuk - Lahat ng karapatan ay nakalaan"
+    }
+};
+
+// فتح/غلق القائمة
+langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langBtn.classList.toggle('active');
+    langDropdown.classList.toggle('show');
+});
+
+// إغلاق القائمة عند النقر خارجها
+document.addEventListener('click', (e) => {
+    if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
+        langBtn.classList.remove('active');
+        langDropdown.classList.remove('show');
+    }
+});
+
+// تغيير اللغة
+langOptions.forEach(option => {
+    option.addEventListener('click', function() {
+        const lang = this.dataset.lang;
+        const langText = this.textContent.trim();
+        
+        // تحديث الزر باللغة المختارة
+        currentLangSpan.textContent = langText;
+        
+        // إزالة active من جميع الخيارات وإضافته للمختار
+        langOptions.forEach(opt => opt.classList.remove('active'));
+        this.classList.add('active');
+        
+        // إغلاق القائمة
+        langBtn.classList.remove('active');
+        langDropdown.classList.remove('show');
+        
+        // تغيير اتجاه الصفحة حسب اللغة
+        if (lang === 'ar') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', 'ar');
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', lang);
+        }
+        
+        // تغيير المحتوى حسب اللغة
+        changeLanguage(lang);
+    });
+});
+
+// دالة تغيير المحتوى
+function changeLanguage(lang) {
+    if (translations[lang]) {
+        const t = translations[lang];
+        
+        // تحديث الهيدر
+        document.getElementById('header-title').textContent = t.headerTitle;
+        document.getElementById('header-description').textContent = t.headerDesc;
+        
+        // تحديث قسم "من نحن"
+        document.getElementById('about-title').textContent = t.aboutTitle;
+        document.getElementById('about-text').textContent = t.aboutText;
+        
+        // تحديث عنوان الخدمات
+        document.getElementById('services-title').textContent = t.servicesTitle;
+        
+        // تحديث البطاقات (8 بطاقات)
+        for (let i = 1; i <= 8; i++) {
+            const service = t[`service${i}`];
+            if (service) {
+                document.getElementById(`service${i}-title`).textContent = service.title;
+                document.getElementById(`service${i}-desc`).textContent = service.desc;
+            }
+        }
+        
+        // تحديث قسم CTA
+        document.getElementById('cta-title').textContent = t.ctaTitle;
+        document.getElementById('cta-text').textContent = t.ctaText;
+        document.getElementById('cta-button').textContent = t.ctaButton;
+        
+        // تحديث التنويه
+        document.getElementById('disclaimer').innerHTML = `<i class="fas fa-exclamation-circle"></i> ${t.disclaimer} <i class="fas fa-exclamation-circle"></i>`;
+        
+        // تحديث الفوتر
+        document.getElementById('footer').innerHTML = `${t.footer}<br><i class="fas fa-phone"></i> قريباً  |  <i class="fas fa-map-marker-alt"></i> تبوك - حي الصفا`;
+        
+        // تحديث عنوان الصفحة
+        document.title = t.headerTitle + " | تبوك حي الصفا";
+    }
+}
 
 </script>
 
