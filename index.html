@@ -4,203 +4,486 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مركز رست الرياضي | تبوك حي الصفا</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<!-- خط Cairo + خط Amiri للتراث -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<!-- Font Awesome للأيقونات التراثية -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Cairo',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Cairo',sans-serif;
 }
+
 body{
-    background:#0f172a;
-    color:white;
+background:#faf0e6;  /* خلفية بيج تراثي فاتح */
+color:#2d2010;  /* بني داكن */
+background-image:url("https://www.transparenttextures.com/patterns/arabesque.png");
+user-select:none;
 }
+
+/* ===== إضافة الزخارف التراثية السعودية ===== */
+.sadu-border-top {
+    background: linear-gradient(135deg, #7b4b2a 0%, #a67b5b 50%, #7b4b2a 100%);
+    height: 10px;
+    width: 100%;
+    position: relative;
+}
+.sadu-border-top::before,
+.sadu-border-top::after {
+    content: "⚘";
+    font-size: 28px;
+    color: #e6cba0;
+    position: absolute;
+    top: -12px;
+}
+.sadu-border-top::before { left: 10%; transform: rotate(90deg); }
+.sadu-border-top::after { right: 10%; transform: rotate(-90deg); }
+
+/* زخرفة نجدية للأقسام */
+.najdi-pattern {
+    background-image: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 10 L50 30 L30 50 L10 30 Z" fill="none" stroke="%23c49a6c30" stroke-width="2"/><circle cx="30" cy="30" r="6" fill="none" stroke="%23b78c5f30" stroke-width="2"/></svg>');
+    background-repeat: repeat;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* زينة رمضان مع لمسة تراثية */
+.ramadan-lights{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+text-align:center;
+font-size:32px;
+background: #2d2010;  /* بني تراثي */
+color: #e6cba0;
+padding:12px;
+z-index:9999;
+font-family: 'Amiri', serif;
+border-bottom: 3px solid #b78c5f;
+}
+
+/* شريط الخصم - عرض خصومات رمضان */
+.ramadan-offer{
+position:fixed;
+top:120px;
+right:-60px;
+background: #b78c5f;
+color: #2d2010;
+padding:15px 80px;
+transform:rotate(45deg);
+font-weight:900;
+z-index:9999;
+border: 3px solid #5a3e28;
+font-size: 1.2rem;
+box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* هيدر مع تأثير تراثي */
 header{
-    height:100vh;
-    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.7)),
-    url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070') center/cover no-repeat;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
+height:100vh;
+background:
+linear-gradient(rgba(45,32,16,0.8), rgba(30,60,44,0.9)),
+url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070') center/cover no-repeat;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+position: relative;
+border-bottom: 8px solid #b78c5f;
 }
+
+header::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,20 Q25,5 50,20 T100,20 L100,0 L0,0 Z" fill="%23b78c5f" opacity="0.3"/></svg>');
+    background-size: cover;
+}
+
 header h1{
-    font-size:48px;
-    font-weight:900;
-    margin-bottom:20px;
+font-size:58px;
+font-weight:900;
+margin-bottom:20px;
+color: #f5e6d3;
+text-shadow: 4px 4px 0 #2d2010;
+font-family: 'Amiri', serif;
+letter-spacing: 2px;
 }
+
 header p{
-    font-size:20px;
-    max-width:700px;
-    margin-bottom:30px;
-    line-height:1.8;
+font-size:22px;
+max-width:700px;
+margin-bottom:30px;
+line-height:1.8;
+color: #ece2d5;
+background: rgba(45,32,16,0.5);
+padding: 15px 30px;
+border-radius: 60px;
+border: 2px solid #b78c5f;
+backdrop-filter: blur(5px);
 }
+
 .btn{
-    background:#d4af37;
-    color:black;
-    padding:15px 35px;
-    border:none;
-    border-radius:40px;
-    font-size:18px;
-    font-weight:700;
-    text-decoration:none;
-    transition:0.3s;
+background: #b78c5f;
+color: #1e3c2c;
+padding:15px 45px;
+border-radius:50px;
+font-size:20px;
+font-weight:900;
+text-decoration:none;
+transition:0.3s;
+box-shadow:0 8px 0 #5a3e28;
+border: 2px solid #e6cba0;
 }
+
 .btn:hover{
-    background:white;
+background:#e6cba0;
+transform:translateY(-3px);
+box-shadow:0 12px 0 #5a3e28;
 }
+
 section{
-    padding:80px 10%;
+padding:80px 10%;
+position: relative;
 }
+
 .section-title{
-    text-align:center;
-    font-size:36px;
-    margin-bottom:50px;
-    color:#d4af37;
+text-align:center;
+font-size:42px;
+margin-bottom:50px;
+color:#1e3c2c;
+font-family: 'Amiri', serif;
+position: relative;
+display: inline-block;
+width: 100%;
 }
+
+.section-title span {
+    background: #e6d5b8;
+    padding: 0.5rem 4rem;
+    border-radius: 100px;
+    border: 4px solid #b78c5f;
+    display: inline-block;
+}
+
 .services{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:35px;
 }
+
+/* البطاقات مع لمسة تراثية */
 .card{
-    background:#1e293b;
-    padding:30px;
-    border-radius:20px;
-    transition:0.4s;
-    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+background:#fff9f0;
+border: 3px solid #a67b5b;
+border-radius: 40px 10px 40px 10px;
+padding:35px 25px;
+transition:0.4s ease;
+box-shadow:10px 10px 0 #7b4b2a;
+backdrop-filter:blur(5px);
+color: #2d2010;
 }
+
 .card:hover{
-    transform:translateY(-10px);
+transform:translateY(-15px) scale(1.02);
+box-shadow:15px 15px 0 #5a3e28;
 }
+
 .card h3{
-    margin-bottom:15px;
-    color:#d4af37;
+margin-bottom:15px;
+color:#1e3c2c;
+font-size:28px;
+font-weight:900;
+border-bottom: 2px dashed #b78c5f;
+padding-bottom: 10px;
 }
+
 .card p{
-    line-height:1.8;
-    font-size:15px;
+line-height:1.8;
+font-size:16px;
+font-weight:600;
 }
+
 .about{
-    text-align:center;
-    max-width:800px;
-    margin:auto;
-    line-height:2;
-    font-size:18px;
+text-align:center;
+max-width:900px;
+margin:auto;
+line-height:2.2;
+font-size:20px;
+background: #1e3c2c;
+color: #faf3e8;
+padding: 40px;
+border-radius: 80px 20px 80px 20px;
+border: 5px solid #b78c5f;
+box-shadow: 20px 20px 0 #2d2010;
 }
+
 .cta{
-    background:#d4af37;
-    color:black;
-    text-align:center;
-    padding:60px 20px;
+background:#b78c5f;
+color:#2d2010;
+text-align:center;
+padding:70px 20px;
+border-radius: 120px 20px 120px 20px;
+margin: 30px 10%;
+border: 5px solid #5a3e28;
 }
+
 .cta h2{
-    font-size:32px;
-    margin-bottom:20px;
+font-size:42px;
+margin-bottom:20px;
+font-family: 'Amiri', serif;
 }
+
 .cta a{
-    background:black;
-    color:white;
-    padding:15px 40px;
-    border-radius:40px;
-    text-decoration:none;
-    font-weight:700;
+background:#1e3c2c;
+color:white;
+padding:18px 50px;
+border-radius:60px;
+text-decoration:none;
+font-weight:900;
+font-size: 1.8rem;
+border: 3px solid #e6cba0;
+display: inline-block;
+transition: 0.3s;
 }
+
+.cta a:hover {
+    background: #2d2010;
+    transform: scale(1.05);
+}
+
 footer{
-    background:#0b1120;
-    text-align:center;
-    padding:30px;
-    font-size:14px;
-    color:#aaa;
+background:#1e3c2c;
+color:#e6d5b8;
+text-align:center;
+padding:30px;
+font-size:16px;
+border-top: 6px solid #b78c5f;
+font-family: 'Amiri', serif;
 }
+
+/* ===== قسم خصومات رمضان (بديل العداد) ===== */
+.ramadan-discounts {
+    background: #b78c5f;
+    padding: 2rem;
+    border-bottom: 5px solid #5a3e28;
+    border-top: 5px solid #e6d5b8;
+}
+
+.discounts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.discount-item {
+    background: #2d2010;
+    color: #faf3e8;
+    padding: 1.5rem 2.5rem;
+    border-radius: 60px 15px 60px 15px;
+    border: 3px solid #e6cba0;
+    box-shadow: 8px 8px 0 #5a3e28;
+    font-size: 1.4rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.discount-item i {
+    font-size: 2.5rem;
+    color: #e6cba0;
+}
+
+.discount-item span {
+    color: #f5c542;
+    font-size: 2rem;
+    margin: 0 0.5rem;
+}
+
+/* إخلاء مسؤولية غير طبي - الآن قبل الفوتر */
+.medical-disclaimer {
+    background: #2d2010;
+    color: #e6d5b8;
+    padding: 1.8rem;
+    text-align: center;
+    font-size: 1.3rem;
+    border-bottom: 4px solid #b78c5f;
+    border-top: 4px solid #b78c5f;
+    margin: 40px 0 0 0;
+    width: 100%;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.medical-disclaimer i {
+    font-size: 2.2rem;
+    margin: 0 1.2rem;
+    color: #b78c5f;
+    vertical-align: middle;
+}
+
+/* تحسينات إضافية */
+.ramadan-lights i {
+    margin: 0 10px;
+    color: #e6cba0;
+}
+
+header h1 i {
+    color: #b78c5f;
+    margin-left: 10px;
+}
+
+/* موبايل */
+@media(max-width:768px){
+header h1{font-size:40px;}
+header p{font-size:18px;}
+.section-title{font-size:32px;}
+section{padding:60px 5%;}
+.ramadan-offer{display:none;}
+.discount-item{flex-wrap: wrap; justify-content: center; text-align: center; padding: 1.2rem;}
+.medical-disclaimer{font-size: 1.1rem; padding: 1.2rem;}
+.medical-disclaimer i{font-size: 1.6rem; margin: 0 0.5rem;}
+}
+
 </style>
 </head>
+
 <body>
 
+<!-- زينة رمضان -->
+<div class="ramadan-lights">
+    <i class="fas fa-moon"></i> هلال الخير • قمر الليل • فوانيس رمضان <i class="fas fa-star"></i>
+</div>
+
 <header>
-    <h1>مركز الاسترخاء الملكي للرجال</h1>
-    <p>
-        تجربة فاخرة من الهدوء والراحة في قلب حي الصفا – تبوك.
-        نقدم خدمات مساج وعناية متكاملة بأعلى معايير النظافة والخصوصية للرجال فقط.
-    </p>
-    <a href="#services" class="btn">استكشف خدماتنا</a>
+<h1><i class="fas fa-spa"></i> مركز رست الرياضي للمساج <i class="fas fa-spa"></i></h1>
+<p>
+تجربة فاخرة من الهدوء والراحة في قلب حي الصفا – تبوك.
+نقدم خدمات مساج وعناية متكاملة بأعلى معايير النظافة.
+</p>
+<a href="#services" class="btn">استكشف خدماتنا</a>
 </header>
 
 <section id="about">
-    <h2 class="section-title">من نحن</h2>
-    <div class="about">
-        نحن مركز متخصص في تقديم جلسات المساج الاحترافية والعناية الشخصية للرجال،
-        نوفر بيئة راقية وهادئة تمنحك تجربة استرخاء حقيقية بعيداً عن ضغوط الحياة اليومية.
-        هدفنا هو راحتك التامة ورضاك الكامل، لذلك نهتم بأدق التفاصيل من النظافة إلى جودة الخدمة.
-    </div>
+<h2 class="section-title"><span>من نحن</span></h2>
+<div class="about">
+نحن مركز متخصص في تقديم جلسات المساج الاحترافية والعناية الشخصية للرجال،
+نوفر بيئة راقية وهادئة تمنحك تجربة استرخاء حقيقية بعيداً عن ضغوط الحياة اليومية.
+هدفنا هو راحتك التامة.
+</div>
 </section>
 
 <section id="services">
-    <h2 class="section-title">خدماتنا</h2>
-    <div class="services">
+<h2 class="section-title"><span>خدمات المساج</span></h2>
 
-        <div class="card">
-            <h3>المساج السويدي</h3>
-            <p>استرخاء عميق، تخفيف التوتر، وتنشيط الدورة الدموية بأسلوب كلاسيكي مريح.</p>
-        </div>
+<div class="services">
 
-        <div class="card">
-            <h3>المساج التايلندي</h3>
-            <p>تقنيات شد وتمدد احترافية لتحسين المرونة وتحرير الطاقة بالجسم.</p>
-        </div>
+<div class="card">
+<h3>المساج السويدي</h3>
+<p>استرخاء عميق وتنشيط الدورة الدموية بأسلوب مريح.</p>
+</div>
 
-        <div class="card">
-            <h3>المساج الياباني</h3>
-            <p>ضغط دقيق على نقاط الطاقة لاستعادة التوازن الجسدي والذهني.</p>
-        </div>
+<div class="card">
+<h3>المساج التايلندي</h3>
+<p>تقنيات شد وتمدد احترافية لتحسين المرونة.</p>
+</div>
 
-        <div class="card">
-            <h3>المساج الرياضي</h3>
-            <p>مثالي للرياضيين، يساعد في الاستشفاء العضلي وتقليل الإجهاد.</p>
-        </div>
+<div class="card">
+<h3>المساج الياباني</h3>
+<p>ضغط دقيق على نقاط الطاقة لاستعادة التوازن.</p>
+</div>
 
-        <div class="card">
-            <h3>الأكواب الهوائية</h3>
-            <p>تحفيز الدورة الدموية وتخفيف التشنجات باستخدام تقنيات الحجامة الجافة.</p>
-        </div>
+<div class="card">
+<h3>المساج الرياضي</h3>
+<p>مناسب للرياضيين ويساعد في الاستشفاء العضلي.</p>
+</div>
 
-        <div class="card">
-            <h3>مساج الأحجار الساخنة</h3>
-            <p>إحساس بالدفء والاسترخاء العميق لتخفيف آلام العضلات.</p>
-        </div>
+<div class="card">
+<h3>الأكواب الهوائية</h3>
+<p>تحفيز الدورة الدموية وتقليل التشنجات.</p>
+</div>
 
-        <div class="card">
-            <h3>الحمام المغربي</h3>
-            <p>تنظيف عميق وتقشير احترافي يمنحك بشرة ناعمة ومنتعشة.</p>
-        </div>
+<div class="card">
+<h3>مساج الأحجار الساخنة</h3>
+<p>استرخاء عميق وتخفيف آلام العضلات.</p>
+</div>
 
-        <div class="card">
-            <h3>العناية الشخصية</h3>
-            <p>
-                باديكير – مانيكير – تنظيف كعب القدم – 
-                حلاقة كامل الجسم – حلاقة المناطق الحساسة – 
-                حلاقة حسب الطلب.
-            </p>
-        </div>
+<div class="card">
+<h3>الحمام المغربي</h3>
+<p>تنظيف عميق وتقشير احترافي للبشرة.</p>
+</div>
 
-    </div>
+<div class="card">
+<h3>العناية الشخصية</h3>
+<p>باديكير – مانيكير – تنظيف القدم – حلاقة حسب الطلب.</p>
+</div>
+
+</div>
 </section>
 
 <section class="cta">
-    <h2>جرب الخدمة… وشاركنا رأيك</h2>
-    <p>تقييمك لنا يساعدنا على التطور وتقديم الأفضل دائماً.</p>
-    <br>
-    <a href="https://share.google/2Dz5FNZyGDSyAN9jm" target="_blank">قيّمنا على قوقل الآن</a>
+<h2>جرب الخدمة… وشاركنا رأيك</h2>
+<p>تقييمك لنا يساعدنا على التطور.</p>
+<br>
+<a href="https://share.google/2Dz5FNZyGDSyAN9jm" target="_blank">قيّمنا على قوقل</a>
 </section>
 
+<!-- التنويه قبل الفوتر مباشرة - حسب الطلب -->
+<div class="medical-disclaimer">
+    <i class="fas fa-exclamation-circle"></i>
+    تنويه: مركز رست مركز متخصص في المساج والاسترخاء، وجميع خدماتنا للراحة والرفاهية فقط وليست بديلاً عن العلاج الطبي.
+    <i class="fas fa-exclamation-circle"></i>
+</div>
+
 <footer>
-    © 2026 مركز الاسترخاء الملكي للرجال – حي الصفا – تبوك  
-    جميع الحقوق محفوظة
+© 2026 مركز رست الرياضي – حي الصفا – تبوك – جميع الحقوق محفوظة
+<br>
+<i class="fas fa-phone"></i> قريباً  |  <i class="fas fa-map-marker-alt"></i> تبوك - حي الصفا
 </footer>
 
-</body>
+<script>
 
+/* منع النسخ */
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+
+/* تأثير ظهور الكروت */
+const cards = document.querySelectorAll('.card');
+
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.style.opacity="1";
+entry.target.style.transform="translateY(0)";
+}
+});
+});
+
+cards.forEach(card=>{
+card.style.opacity="0";
+card.style.transform="translateY(50px)";
+card.style.transition="0.8s";
+observer.observe(card);
+});
+
+</script>
+
+</body>
 </html>
